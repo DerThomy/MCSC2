@@ -7,9 +7,16 @@ using MySql.Data.MySqlClient;
 
 namespace SSHLib
 {
-    public static class MySqlHandler
+    public class MySqlHandler
     {
-        public static String[] MySqlSelectData(String command, String connectionString)
+        private String connectionString;
+
+        public MySqlHandler(String connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public virtual String[] MySqlSelectData(String command)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlCommand cmd = new MySqlCommand(command, conn);
@@ -53,7 +60,7 @@ namespace SSHLib
             }
         }
 
-        public static void MySqlNoQueryData(String command, String connectionString)
+        public virtual void MySqlNoQueryData(String command)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlCommand cmd = new MySqlCommand(command, conn);
@@ -76,6 +83,10 @@ namespace SSHLib
                 Console.Error.WriteLine(e);
                 return;
             }
+        }
+        public void setConnectionString(String connectionString)
+        {
+            this.connectionString = connectionString;
         }
     }
 }

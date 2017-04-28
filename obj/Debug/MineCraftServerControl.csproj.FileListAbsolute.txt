@@ -18,6 +18,3 @@ C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\Mine
 C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\MineCraftServerControl\obj\Debug\MineCraftServerControl.csproj.GenerateResource.Cache
 C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\MineCraftServerControl\obj\Debug\MineCraftServerControl.exe
 C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\MineCraftServerControl\obj\Debug\MineCraftServerControl.pdb
-C:\Users\Thomy\Documents\GitHub\MCSC\MCSC\MineCraftServerControl\MineCraftServerControl\bin\Debug\MineCraftServerControl.exe.config
-C:\Users\Thomy\Documents\GitHub\MCSC\MCSC\MineCraftServerControl\MineCraftServerControl\obj\Debug\MineCraftServerControl.exe
-C:\Users\Thomy\Documents\GitHub\MCSC\MCSC\MineCraftServerControl\MineCraftServerControl\obj\Debug\MineCraftServerControl.pdb
