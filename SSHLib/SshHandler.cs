@@ -16,19 +16,43 @@ namespace SSHLib
             client = new SshClient(host, username, password);
         }
 
-        public virtual void ExecuteCommand(String command)
+        public virtual void ExecuteCommandWithoutOutput(String command)
         {
-            var cmd = client.CreateCommand(command);
-
             try
             {
                 client.Connect();
+
+                var cmd = client.CreateCommand(command);
 
                 cmd.Execute();
             }
             catch(Exception e)
             {
                 Console.Error.WriteLine("Couldn't execute command: " + command + ": " + e);
+            }
+            finally
+            {
+                client.Disconnect();
+            }
+        }
+
+        public virtual String ExecuteCommandWithOutput(String command)
+        {
+            try
+            {
+                client.Connect();
+
+                var cmd = client.CreateCommand(command);
+
+                var output = cmd.Execute();
+
+                return output.ToString();
+            }
+            catch(Exception e)
+            {
+                Console.Error.WriteLine("Couldn't execute command: " + command + ": " + e);
+
+                return null;
             }
             finally
             {

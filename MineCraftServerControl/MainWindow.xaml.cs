@@ -27,10 +27,14 @@ namespace MineCraftServerControl
             InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            String[] data = MySqlHandler.MySqlSelectData("SELECT IP,ID from Server", "server=10.0.0.200;uid=root;pwd=Anakankoe99;database=Server");
-            Console.Write(data[0]);
+            String host = "10.0.0.200";
+            String username = "root";
+            String pwd = "Anakankoe99";
+            SshHandler SshRaspRoot = new SshHandler(host, username, pwd);
+
+            Debug.Text = SshRaspRoot.ExecuteCommandWithOutput("ls");
         }
     }
 }

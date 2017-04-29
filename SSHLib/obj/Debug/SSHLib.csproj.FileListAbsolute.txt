@@ -9,3 +9,14 @@ C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\SSHL
 C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.csprojResolveAssemblyReference.cache
 C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.dll
 C:\Users\Thomy\documents\visual studio 2017\Projects\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.pdb
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\SSHLib.dll.config
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\SSHLib.dll
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\SSHLib.pdb
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\MySql.Data.dll
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.Async.dll
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.dll
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.xml
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.Async.xml
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.csprojResolveAssemblyReference.cache
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.dll
+C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.pdb
