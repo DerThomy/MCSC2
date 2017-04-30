@@ -69,8 +69,8 @@ namespace MineCraftServerControl
                 }
                 else
                 {
-                    //!!!!!!!!!!
-                    System.Threading.Thread.Sleep(500);
+
+                    ToolBox.DelayAction(500, new Action() => { ; });
                 }
             }
         }
