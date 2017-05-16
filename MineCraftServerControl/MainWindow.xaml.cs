@@ -31,7 +31,7 @@ namespace MineCraftServerControl
             BackgroundWorkerHandler BwH = new BackgroundWorkerHandler();
 
             BackgroundWorker Main = new BackgroundWorker();
-            BwH.InitializeBW(Main, true, true);
+            BwH.SetupBW(Main, true, true);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace MineCraftServerControl
 
     public class BackgroundWorkerHandler
     {
-        public virtual void InitializeBW(BackgroundWorker bw, bool WorkerSupportsCancellation, bool WorkerReportsProgress)
+        public virtual void SetupBW(BackgroundWorker bw, bool WorkerSupportsCancellation, bool WorkerReportsProgress)
         {
             if (WorkerSupportsCancellation == true)
             {
