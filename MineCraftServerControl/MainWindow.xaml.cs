@@ -70,7 +70,7 @@ namespace MineCraftServerControl
                 else
                 {
 
-                    ToolBox.DelayAction(500, new Action() => { ; });
+                    //dely action
                 }
             }
         }
