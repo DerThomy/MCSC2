@@ -28,21 +28,43 @@ namespace MineCraftServerControl
         {
             InitializeComponent();
 
+            //LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+
             BackgroundWorkerHandler BwH = new BackgroundWorkerHandler();
 
             BackgroundWorker Main = new BackgroundWorker();
-            BwH.SetupBW(Main, true, true);
+            BwH.SetupBW(ref Main, true, true);
+
+            Main.DoWork += new DoWorkEventHandler(UpdateIP);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
         }
+
+        public virtual void UpdateIP(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            while (true)
+            {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+                    ToolBox.DelayAction(500, new Action(() => { }));
+                }
+            }
+        }
     }
 
     public class BackgroundWorkerHandler
     {
-        public virtual void SetupBW(BackgroundWorker bw, bool WorkerSupportsCancellation, bool WorkerReportsProgress)
+        public virtual void SetupBW(ref BackgroundWorker bw, bool WorkerSupportsCancellation, bool WorkerReportsProgress)
         {
             if (WorkerSupportsCancellation == true)
             {
@@ -52,26 +74,6 @@ namespace MineCraftServerControl
             if (WorkerReportsProgress == true)
             {
                 bw.WorkerReportsProgress = true;
-            }
-        }
-    }
-
-    public class BackgroundFunctions : MainWindow{
-        public virtual void UpdateIP(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            while (true)
-            {
-                if ((worker.CancellationPending == true))
-                {
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-
-                    //dely action
-                }
             }
         }
     }
