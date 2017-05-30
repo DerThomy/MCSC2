@@ -19,7 +19,7 @@ namespace SSHLib
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
-                    return ip.ToString();
+                    return ip.ToString().Trim();
                 }
             }
             throw new Exception("Local IP Address Not Found!");
@@ -28,23 +28,23 @@ namespace SSHLib
         public static String getExternalIP()
         {
             String IP = new WebClient().DownloadString("http://icanhazip.com");
-            return IP.Remove(IP.Length - 1);
+            return IP.Trim();
         }
 
         public static String getHostEntry(String url)
         {
-            return Dns.GetHostEntry(url).AddressList.First().ToString();
+            return Dns.GetHostEntry(url).AddressList.First().ToString().Trim();
         }
 
         public static String getIPOfLocation(String url, String localIP = "")
         {
             if(getHostEntry(url) == getExternalIP())
             {
-                return getExternalIP();
+                return localIP == "" ? getInternalIP() : localIP;
             }
             else
             {
-                return localIP == "" ? getInternalIP() : localIP;
+                return getExternalIP();
             }
         }
     }

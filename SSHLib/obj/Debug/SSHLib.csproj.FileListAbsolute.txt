@@ -20,3 +20,14 @@ C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\bin\Debug\Ren
 C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.csprojResolveAssemblyReference.cache
 C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.dll
 C:\Users\Thomy\Documents\GitHub\MCSC\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.pdb
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\SSHLib.dll.config
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\SSHLib.dll
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\SSHLib.pdb
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\MySql.Data.dll
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.Async.dll
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.dll
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.xml
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\bin\Debug\Renci.SshNet.Async.xml
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.csprojResolveAssemblyReference.cache
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.dll
+C:\Users\Thomy\Documents\GitHub\MCSC2\MineCraftServerControl\SSHLib\obj\Debug\SSHLib.pdb
