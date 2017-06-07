@@ -35,7 +35,8 @@ namespace MineCraftServerControl
             BackgroundWorker Main = new BackgroundWorker();
             BwH.SetupBW(ref Main, true, true);
 
-            Main.DoWork += new DoWorkEventHandler(UpdateIP);
+            Main.DoWork += new DoWorkEventHandler(Main_DoWork
+);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -43,7 +44,7 @@ namespace MineCraftServerControl
 
         }
 
-        public virtual void UpdateIP(object sender, DoWorkEventArgs e)
+        public virtual void Main_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
             while (true)
