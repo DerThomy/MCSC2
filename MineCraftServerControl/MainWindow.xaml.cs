@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,15 +29,24 @@ namespace MineCraftServerControl
         {
             InitializeComponent();
 
-            //LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
-
-            BackgroundWorkerHandler BwH = new BackgroundWorkerHandler();
+            BackgroundWorkHandler BwH = new BackgroundWorkHandler();
 
             BackgroundWorker Main = new BackgroundWorker();
-            BwH.SetupBW(ref Main, true, true);
+            BwH.SetupBW(ref Main, false, false);
 
+<<<<<<< HEAD
             Main.DoWork += new DoWorkEventHandler(Main_DoWork
 );
+=======
+            Main.DoWork += BwH.DoWork(new Action(()=> {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    this.LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+                }),DispatcherPriority.ContextIdle);
+                Thread.Sleep(500);
+            }));
+            Main.RunWorkerAsync();
+>>>>>>> 6a52782b4ceacfb53b3b7716064852ce495e78d3
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -44,6 +54,7 @@ namespace MineCraftServerControl
 
         }
 
+<<<<<<< HEAD
         public virtual void Main_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -77,5 +88,8 @@ namespace MineCraftServerControl
                 bw.WorkerReportsProgress = true;
             }
         }
+=======
+        
+>>>>>>> 6a52782b4ceacfb53b3b7716064852ce495e78d3
     }
 }
