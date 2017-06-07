@@ -34,19 +34,16 @@ namespace MineCraftServerControl
             BackgroundWorker Main = new BackgroundWorker();
             BwH.SetupBW(ref Main, false, false);
 
-<<<<<<< HEAD
-            Main.DoWork += new DoWorkEventHandler(Main_DoWork
-);
-=======
+            Main.DoWork += new DoWorkEventHandler(Main_DoWork);
+
             Main.DoWork += BwH.DoWork(new Action(()=> {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    this.LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+                    updateGui();
                 }),DispatcherPriority.ContextIdle);
                 Thread.Sleep(500);
             }));
             Main.RunWorkerAsync();
->>>>>>> 6a52782b4ceacfb53b3b7716064852ce495e78d3
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -54,7 +51,8 @@ namespace MineCraftServerControl
 
         }
 
-<<<<<<< HEAD
+
+
         public virtual void Main_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -72,24 +70,10 @@ namespace MineCraftServerControl
                 }
             }
         }
-    }
 
-    public class BackgroundWorkerHandler
-    {
-        public virtual void SetupBW(ref BackgroundWorker bw, bool WorkerSupportsCancellation, bool WorkerReportsProgress)
+        private void updateGui()
         {
-            if (WorkerSupportsCancellation == true)
-            {
-                bw.WorkerSupportsCancellation = true;
-            }
-
-            if (WorkerReportsProgress == true)
-            {
-                bw.WorkerReportsProgress = true;
-            }
+            this.LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
         }
-=======
-        
->>>>>>> 6a52782b4ceacfb53b3b7716064852ce495e78d3
     }
 }
