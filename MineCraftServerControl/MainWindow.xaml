@@ -12,5 +12,6 @@
         <Label Content="IP: " HorizontalAlignment="Left" Margin="20,51,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelStatus" Content="" HorizontalAlignment="Left" Margin="73,20,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelIP" Content="" HorizontalAlignment="Left" Margin="73,51,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ServerListBox" HorizontalAlignment="Left" Margin="316,24,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

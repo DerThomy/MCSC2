@@ -29,19 +29,28 @@ namespace MineCraftServerControl
         {
             InitializeComponent();
 
-            int i = 0;
+            SshHandler SshHandler = new SshHandler(IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200"), "root", "Anakankoe99");
+
+            List<Server> ServerList = new List<Server>()
+            {
+                new Server() { StartCommand="./ARK/startServer", SshHanlder = SshHandler, Name = "ARKServer"}
+            };
+
+            ServerListBox.ItemsSource = ServerList.Select(n => n.Name);
 
             BackgroundWorkHandler BwH = new BackgroundWorkHandler();
 
             BackgroundWorker Main = new BackgroundWorker();
+            BwH.SetupBW(ref Main, false, false);
+
+            Main.DoWork += new DoWorkEventHandler(Main_DoWork);
 
             Main.DoWork += BwH.DoWork(new Action(()=> {
-                Dispatcher.InvokeAsync(new Action(() =>
+                Dispatcher.Invoke(new Action(() =>
                 {
-                    this.LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
-                    this.Debug.Text += i;
-                    i++;
+                    updateGui();
                 }),DispatcherPriority.ContextIdle);
+                Thread.Sleep(500);
             }));
             Main.RunWorkerAsync();
         }
@@ -51,6 +60,47 @@ namespace MineCraftServerControl
 
         }
 
-        
+
+
+        public virtual void Main_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            while (true)
+            {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+                    ToolBox.DelayAction(500, new Action(() => { }));
+                }
+            }
+        }
+
+        private void updateGui()
+        {
+            LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+        }
+    }
+
+    public class Server
+    {
+        public String StartCommand { get; set; }
+        public String StopCommand { get; set; }
+        public String Name { get; set; }
+        public SshHandler SshHanlder { get; set; }
+
+        public void StartServer()
+        {
+            this.SshHanlder.ExecuteCommandWithoutOutput("./boot && ssh sshpass -p Anakankoe99 ssh thomy@10.0.0.20 '"+StartCommand+"'");
+        }
+
+        public void StopServer()
+        {
+            this.SshHanlder.ExecuteCommandWithoutOutput("ssh sshpass - p Anakankoe99 ssh thomy@10.0.0.20 '"+StopCommand+"'");
+        }
     }
 }
