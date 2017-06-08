@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SSHLib
@@ -30,6 +31,7 @@ namespace SSHLib
                 while (true)
                 {
                     action();
+                    Thread.Sleep(500);
                 }
             }
 

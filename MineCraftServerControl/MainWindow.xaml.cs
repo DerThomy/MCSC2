@@ -29,17 +29,19 @@ namespace MineCraftServerControl
         {
             InitializeComponent();
 
+            int i = 0;
+
             BackgroundWorkHandler BwH = new BackgroundWorkHandler();
 
             BackgroundWorker Main = new BackgroundWorker();
-            BwH.SetupBW(ref Main, false, false);
 
             Main.DoWork += BwH.DoWork(new Action(()=> {
-                Dispatcher.Invoke(new Action(() =>
+                Dispatcher.InvokeAsync(new Action(() =>
                 {
                     this.LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+                    this.Debug.Text += i;
+                    i++;
                 }),DispatcherPriority.ContextIdle);
-                Thread.Sleep(500);
             }));
             Main.RunWorkerAsync();
         }
