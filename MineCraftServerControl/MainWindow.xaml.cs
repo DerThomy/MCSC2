@@ -29,6 +29,15 @@ namespace MineCraftServerControl
         {
             InitializeComponent();
 
+            SshHandler SshHandler = new SshHandler(IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200"), "root", "Anakankoe99");
+
+            List<Server> ServerList = new List<Server>()
+            {
+                new Server() { StartCommand="./ARK/startServer", SshHanlder = SshHandler, Name = "ARKServer"}
+            };
+
+            ServerListBox.ItemsSource = ServerList.Select(n => n.Name);
+
             BackgroundWorkHandler BwH = new BackgroundWorkHandler();
 
             BackgroundWorker Main = new BackgroundWorker();
@@ -73,7 +82,25 @@ namespace MineCraftServerControl
 
         private void updateGui()
         {
-            this.LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+            LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+        }
+    }
+
+    public class Server
+    {
+        public String StartCommand { get; set; }
+        public String StopCommand { get; set; }
+        public String Name { get; set; }
+        public SshHandler SshHanlder { get; set; }
+
+        public void StartServer()
+        {
+            this.SshHanlder.ExecuteCommandWithoutOutput("./boot && ssh sshpass -p Anakankoe99 ssh thomy@10.0.0.20 '"+StartCommand+"'");
+        }
+
+        public void StopServer()
+        {
+            this.SshHanlder.ExecuteCommandWithoutOutput("ssh sshpass - p Anakankoe99 ssh thomy@10.0.0.20 '"+StopCommand+"'");
         }
     }
 }
