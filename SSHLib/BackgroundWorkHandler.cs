@@ -30,8 +30,16 @@ namespace SSHLib
                 BackgroundWorker worker = sender as BackgroundWorker;
                 while (true)
                 {
-                    action();
-                    Thread.Sleep(500);
+                    if (worker.WorkerSupportsCancellation && worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    else
+                    {
+                        action();
+                        Thread.Sleep(500);
+                    }
                 }
             }
 

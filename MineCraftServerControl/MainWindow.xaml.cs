@@ -25,82 +25,97 @@ namespace MineCraftServerControl
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        SshHandler ServerSsHHandler;
+        List<Server> ServerList;
+        BackgroundWorkHandler BwH;
+        BackgroundWorker GUI;
+        String oldIP = null;
+        String newIP = null;
+        String IPServer = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.20");
+        String IPRes = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+        bool ServerStatus;
+
+
         public MainWindow()
         {
             InitializeComponent();
 
-            SshHandler SshHandler = new SshHandler(IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200"), "root", "Anakankoe99");
+            ServerSsHHandler = new SshHandler(IPRes, "root", "Anakankoe99");
+            BwH = new BackgroundWorkHandler();
+            GUI = new BackgroundWorker();
 
-            List<Server> ServerList = new List<Server>()
+            ServerList = new List<Server>()
             {
-                new Server() { StartCommand="./ARK/startServer", SshHanlder = SshHandler, Name = "ARKServer"}
+                new Server() { StartCommand = "./ARK/startserver", SshHanlder = ServerSsHHandler, Name = "ARKServer", SessionName = "ark_server", ControlPort=7777}
             };
-
             ServerListBox.ItemsSource = ServerList.Select(n => n.Name);
+            Debug.Text += ServerListBox.SelectedIndex.ToString();
+            ServerListBox.SelectedIndex = 0;
 
-            BackgroundWorkHandler BwH = new BackgroundWorkHandler();
-
-            BackgroundWorker Main = new BackgroundWorker();
-            BwH.SetupBW(ref Main, false, false);
-
-            Main.DoWork += new DoWorkEventHandler(Main_DoWork);
-
-            Main.DoWork += BwH.DoWork(new Action(()=> {
-                Dispatcher.Invoke(new Action(() =>
+            BwH.SetupBW(ref GUI, false, false);
+            GUI.DoWork += BwH.DoWork(new Action(()=> {
+                Dispatcher.InvokeAsync(new Action(() =>
                 {
                     updateGui();
                 }),DispatcherPriority.ContextIdle);
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
             }));
-            Main.RunWorkerAsync();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-
-        public virtual void Main_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            while (true)
-            {
-                if (worker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-                    LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
-                    ToolBox.DelayAction(500, new Action(() => { }));
-                }
-            }
+            GUI.RunWorkerAsync();
         }
 
         private void updateGui()
         {
-            LabelIP.Content = IPHandler.getIPOfLocation("altmuensterkoehler.hopto.org", "10.0.0.200");
+            if(ServerListBox.SelectedIndex != -1)
+            {
+                ServerStatus = Convert.ToInt32(ServerSsHHandler
+                    .ExecuteCommandWithOutput("./checkserver "+IPServer+" "+ServerList[ServerListBox.SelectedIndex].ControlPort)) == 0 ? false : true;
+                if(!ServerStatus){
+                    LabelStatus.Content = "Down";
+                    LabelStatus.Foreground = Brushes.Red;
+                }else
+                {
+                    LabelStatus.Content = "Up";
+                    LabelStatus.Foreground = Brushes.Green;
+                }
+            }
+        }
+
+        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ServerList[ServerListBox.SelectedIndex].StartServer();
+            }
+            catch(Exception t)
+            {
+                Debug.Text += "\nDu musst einen Server Auswählen ... falls du dies bereits getan hast kontaktiere mich bitte";
+                Debug.Text += "\nFehler: " + t;
+            }  
+        }
+
+        private void ButtonStop_Click(object sender, RoutedEventArgs e)
+        {
+            ServerList[ServerListBox.SelectedIndex].StopServer();
         }
     }
 
     public class Server
     {
         public String StartCommand { get; set; }
-        public String StopCommand { get; set; }
         public String Name { get; set; }
+        public String SessionName { get; set; }
         public SshHandler SshHanlder { get; set; }
+        public int ControlPort { get; set; }
 
         public void StartServer()
         {
-            this.SshHanlder.ExecuteCommandWithoutOutput("./boot && ssh sshpass -p Anakankoe99 ssh thomy@10.0.0.20 '"+StartCommand+"'");
+            SshHanlder.ExecuteCommandWithoutOutput("sshpass -p Anakankoe99 ssh thomy@10.0.0.20 '"+ StartCommand +"'");
         }
 
         public void StopServer()
         {
-            this.SshHanlder.ExecuteCommandWithoutOutput("ssh sshpass - p Anakankoe99 ssh thomy@10.0.0.20 '"+StopCommand+"'");
+            SshHanlder.ExecuteCommandWithoutOutput("sshpass -p Anakankoe99 ssh thomy@10.0.0.20 'tmux kill-session -t"+ SessionName +"'");
         }
     }
 }

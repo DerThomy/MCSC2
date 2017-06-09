@@ -13,5 +13,7 @@
         <Label x:Name="LabelStatus" Content="" HorizontalAlignment="Left" Margin="73,20,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelIP" Content="" HorizontalAlignment="Left" Margin="73,51,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="ServerListBox" HorizontalAlignment="Left" Margin="316,24,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="ButtonStart" Content="Start Server" HorizontalAlignment="Left" Margin="184,153,0,0" VerticalAlignment="Top" Width="88" Click="ButtonStart_Click"/>
+        <Button x:Name="ButtonStop" Content="Stop Server" HorizontalAlignment="Left" Margin="184,192,0,0" VerticalAlignment="Top" Width="88" Click="ButtonStop_Click"/>
     </Grid>
 </Window>
