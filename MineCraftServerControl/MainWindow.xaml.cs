@@ -50,7 +50,6 @@ namespace MineCraftServerControl
                 new Server() { StartCommand = "./ARK/startserver", SshHanlder = ServerSsHHandler, Name = "ARKServer", SessionName = "ark_server", ControlPort=7777}
             };
             ServerListBox.ItemsSource = ServerList.Select(n => n.Name);
-            Debug.Text += ServerListBox.SelectedIndex.ToString();
             ServerListBox.SelectedIndex = 0;
 
             BwH.SetupBW(ref GUI, false, false);
