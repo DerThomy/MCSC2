@@ -44,7 +44,7 @@ namespace SSHLib
             }
             else
             {
-                return getExternalIP();
+                return getHostEntry(url);
             }
         }
     }
